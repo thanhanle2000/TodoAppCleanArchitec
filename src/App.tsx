@@ -1,7 +1,7 @@
-import AppRouter from "./AppRouter";
+import Layout from "./Layout";
 
 function App() {
-  return <AppRouter />;
+  return <Layout />;
 }
 
 export default App;

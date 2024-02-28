@@ -9,37 +9,19 @@ import {
   removeTodo,
   updateTodo,
 } from "src/Data/DataSource/Api/LocalDB/Slices/TodoSlice";
-// import { GetTodos } from "../../../Domain/UseCase/Todo/GetTodos";
-// import { TodoRepositoryImpl } from "../../../Data/Repository/TodoRepositoryImpl";
-// import { CreateTodo } from "../../../Domain/UseCase/Todo/CreateTodo";
-// import { UpdateTodo } from "../../../Domain/UseCase/Todo/UpdateTodo";
-// import { RemoveTodo } from "../../../Domain/UseCase/Todo/RemoveTodo";
-// import { TodoAPIDataSourceImpl } from "../../../Data/DataSource/Api/TodoAPIDataSourceImpl";
 
 export default function TodoViewModel() {
-  // const todosDataSourceImpl = new TodoAPIDataSourceImpl();
-  // const todosRepositoryImpl = new TodoRepositoryImpl(todosDataSourceImpl);
-
-  // const getTodosUseCase = new GetTodos(todosRepositoryImpl);
-  // const createTodoUseCase = new CreateTodo(todosRepositoryImpl);
-  // const updateTodoUseCase = new UpdateTodo(todosRepositoryImpl);
-  // const removeTodoUseCase = new RemoveTodo(todosRepositoryImpl);
-
+  // STATE
   const [value, setValue] = useState("");
+
+  // HOOK
   const todos = useAppSelector((state) => state.todo.todos);
   const dispatch = useAppDispatch();
 
-  // ui actions
-  const resetValue = () => {
-    setValue("");
-  };
+  // RESET VALUE
+  const resetValue = () => setValue("");
 
-  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
-    e.preventDefault();
-    setValue(e.target.value);
-  };
-
-  // actions
+  /* -------------- ACTIONS -------------- */
   const handleGetTodos = (): Todo[] => {
     return todos;
   };
@@ -56,8 +38,6 @@ export default function TodoViewModel() {
 
   const handleUpdateTodo = useCallback(
     (todo: Todo) => {
-      console.log("updatetodo", todo);
-
       dispatch(updateTodo(todo));
     },
     [dispatch]
@@ -70,55 +50,20 @@ export default function TodoViewModel() {
     [dispatch]
   );
 
-  /*actions if we are calling api
-
-  const getTodos = async () => {
-    try {
-      const todosFromStorage = await getTodosUseCase.invoke();
-      setTodos(todosFromStorage);
-    } catch (error) {
-      console.log(error);
-    }
+  const handleChangeValue = (e: React.ChangeEvent<HTMLInputElement>) => {
+    e.preventDefault();
+    setValue(e.target.value);
   };
+  /* -------------- ACTIONS -------------- */
 
-  const createTodo = async () => {
-    try {
-      const createdTodo = await createTodoUseCase.invoke(value);
-      setTodos((prev) => [...prev, createdTodo]);
-      resetValue();
-    } catch (error) {
-      resetValue();
-    }
-  };
-
-  const updateTodo = async (todo: Todo) => {
-    try {
-      const updatedTodo = await updateTodoUseCase.invoke(todo);
-      setTodos((prev) =>
-        prev.map((todo) => (todo.id === updatedTodo.id ? updatedTodo : todo))
-      );
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const removeTodo = async (id: string) => {
-    try {
-      const idRemoved = await removeTodoUseCase.invoke(id);
-      setTodos((prev) => prev.filter((todo) => todo.id !== idRemoved));
-    } catch (error) {
-      console.log(error);
-    }
-  };
-*/
   return {
     handleGetTodos,
     handleCreateTodo,
     handleUpdateTodo,
     handleRemoveTodo,
-    todos,
-    value,
     resetValue,
     handleChangeValue,
+    todos,
+    value,
   };
 }

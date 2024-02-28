@@ -13,7 +13,6 @@ export class GetTodos implements GetTodosUseCase {
   }
 
   async invoke() {
-    const todos = this.todoRepo.getTodos();
-    return todos;
+    return this.todoRepo.getTodos();
   }
 }

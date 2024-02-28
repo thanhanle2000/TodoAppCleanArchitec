@@ -1,40 +1,40 @@
 import { memo } from "react";
-import { Todo } from "src/Domain/Model/Todo";
-
-interface Props {
-  todos: Todo[];
-  handleUpdateTodo: (todo: Todo) => void;
-  handleRemoveTodo: (id: string) => void;
-}
+import useViewModel from "./TodoViewModel";
 
 // eslint-disable-next-line react-refresh/only-export-components
-const TodoList = ({ todos, handleUpdateTodo, handleRemoveTodo }: Props) => {
+const TodoList = () => {
+  const { handleRemoveTodo, handleUpdateTodo, todos } = useViewModel();
   return (
     <ul>
       {todos?.map((todo) => (
         <li
           key={todo.id}
-          className="flex flex-row justify-start items-center list-none"
+          className="flex flex-row justify-start items-center list-none mt-[10px]"
         >
           <input
             type="checkbox"
-            checked={todo.isComplete}
+            checked={todo?.isComplete}
             onChange={(value) =>
-              handleUpdateTodo({ ...todo, isComplete: value.target.checked })
+              handleUpdateTodo({ ...todo, isComplete: value?.target?.checked })
             }
           />
           <input
             type="text"
             value={todo.title}
             onChange={(value) =>
-              handleUpdateTodo({ ...todo, title: value.target.value })
+              handleUpdateTodo({ ...todo, title: value?.target?.value })
             }
-            disabled={todo.isComplete}
+            disabled={todo?.isComplete}
             className={`${
-              todo.isComplete ? "line-through" : ""
-            } text-black text-lg`}
+              todo?.isComplete ? "line-through" : ""
+            } text-black text-sm border-1 h-[20px] w-[200px`}
           />
-          <button onClick={() => handleRemoveTodo(todo.id)}>Remove</button>
+          <button
+            className="h-[27px] ml-[5px] bg-red-500"
+            onClick={() => handleRemoveTodo(todo.id)}
+          >
+            Remove
+          </button>
         </li>
       ))}
     </ul>

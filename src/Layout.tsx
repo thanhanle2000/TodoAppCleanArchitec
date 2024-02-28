@@ -2,7 +2,7 @@ import NotFound from "src/Presentation/NotFound/NotFound";
 import TodoPage from "src/Presentation/Todo/TodoPage";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
-function AppRouter() {
+function Layout() {
   return (
     <BrowserRouter>
       <Routes>
@@ -13,4 +13,4 @@ function AppRouter() {
   );
 }
 
-export default AppRouter;
+export default Layout;

@@ -12,12 +12,15 @@ export class TodoRepositoryImpl implements TodoRepository {
   getTodos(): Promise<Todo[]> {
     return this.dataSource.getTodos();
   }
+
   createTodo(value: string): Promise<Todo> {
     return this.dataSource.createTodo(value);
   }
+
   updateTodo(todo: Todo): Promise<Todo> {
     return this.dataSource.updateTodo(todo);
   }
+
   removeTodo(id: string): Promise<string> {
     return this.dataSource.removeTodo(id);
   }

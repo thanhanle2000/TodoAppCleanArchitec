@@ -3,40 +3,31 @@ import useViewModel from "./TodoViewModel";
 import TodoList from "./TodoList";
 
 function TodoPage() {
-  const {
-    handleGetTodos,
-    handleCreateTodo,
-    handleRemoveTodo,
-    handleUpdateTodo,
-    todos,
-    value,
-    handleChangeValue,
-  } = useViewModel();
+  const { handleGetTodos, handleCreateTodo, handleChangeValue, value } =
+    useViewModel();
 
   useEffect(() => {
-    (async () => {
-      handleGetTodos();
-    })();
-  }, []);
+    handleGetTodos();
+  }, [handleGetTodos]);
 
   return (
     <div className="w-full min-h-[100vh] flex flex-col justify-center items-center">
       <div>
         <input
           type="text"
-          className="text-lg"
-          placeholder="Add 1 Todo"
+          className="border-1 h-[20px] w-[200px] text-sm"
+          placeholder="Add 1 todo..."
           value={value}
           onChange={handleChangeValue}
         />
-        <button onClick={handleCreateTodo}>Add</button>
+        <button
+          className="h-[27px] ml-[5px] bg-blue-600"
+          onClick={handleCreateTodo}
+        >
+          Add
+        </button>
       </div>
-      <hr />
-      <TodoList
-        todos={todos}
-        handleUpdateTodo={handleUpdateTodo}
-        handleRemoveTodo={handleRemoveTodo}
-      />
+      <TodoList />
     </div>
   );
 }

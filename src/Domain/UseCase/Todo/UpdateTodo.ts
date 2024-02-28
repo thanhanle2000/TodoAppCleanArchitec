@@ -13,10 +13,8 @@ export class UpdateTodo implements UpdateTodoUseCase {
   }
 
   async invoke(todo: Todo) {
-    if (todo.title.length < 2) {
+    if (todo.title.length < 2)
       throw new Error("Your todo should have at leat 2 characters.");
-    }
-    const updated = this.todoRepo.updateTodo(todo);
-    return updated;
+    return this.todoRepo.updateTodo(todo);
   }
 }
