@@ -1,20 +1,17 @@
 import { memo } from "react";
 import { Todo } from "src/Domain/Model/Todo";
 
-function TodoList({
-  todos,
-  handleUpdateTodo,
-  handleRemoveTodo,
-}: {
+interface Props {
   todos: Todo[];
   handleUpdateTodo: (todo: Todo) => void;
   handleRemoveTodo: (id: string) => void;
-}) {
-  console.log("list rerender");
+}
 
+// eslint-disable-next-line react-refresh/only-export-components
+const TodoList = ({ todos, handleUpdateTodo, handleRemoveTodo }: Props) => {
   return (
-    <ul className="">
-      {todos.map((todo) => (
+    <ul>
+      {todos?.map((todo) => (
         <li
           key={todo.id}
           className="flex flex-row justify-start items-center list-none"
@@ -22,16 +19,16 @@ function TodoList({
           <input
             type="checkbox"
             checked={todo.isComplete}
-            onChange={(e) => {
-              handleUpdateTodo({ ...todo, isComplete: e.target.checked });
-            }}
+            onChange={(value) =>
+              handleUpdateTodo({ ...todo, isComplete: value.target.checked })
+            }
           />
           <input
             type="text"
             value={todo.title}
-            onChange={(e) => {
-              handleUpdateTodo({ ...todo, title: e.target.value });
-            }}
+            onChange={(value) =>
+              handleUpdateTodo({ ...todo, title: value.target.value })
+            }
             disabled={todo.isComplete}
             className={`${
               todo.isComplete ? "line-through" : ""
@@ -42,6 +39,7 @@ function TodoList({
       ))}
     </ul>
   );
-}
+};
 
+// eslint-disable-next-line react-refresh/only-export-components
 export default memo(TodoList);

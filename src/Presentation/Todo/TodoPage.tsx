@@ -24,10 +24,10 @@ function TodoPage() {
       <div>
         <input
           type="text"
-          placeholder="add 1 Todo"
+          className="text-lg"
+          placeholder="Add 1 Todo"
           value={value}
           onChange={handleChangeValue}
-          className="text-lg"
         />
         <button onClick={handleCreateTodo}>Add</button>
       </div>
